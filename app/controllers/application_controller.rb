@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
 
   before_action :require_login
 
+skip_before_action :require_login, only: [:require_login, :save_and_flash, :find_user]
+
 protected
   def require_login
     @user = User.find_by(id: session[:user_id])
@@ -18,6 +20,7 @@ protected
       flash[:status] = :failure
       flash[:message] = "You must be logged in to do that!"
       redirect_to root_path
+      return
     end
   end
 

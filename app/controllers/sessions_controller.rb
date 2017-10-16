@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-
+skip_before_action :require_login, only: [:login_form, :create, :index]
   def login_form
   end
 
@@ -29,7 +29,7 @@ class SessionsController < ApplicationController
     @user = User.find(session[:user_id]) # < recalls the value set in a previous request
   end
 
-  
+
   def logout
     session[:user_id] = nil
     flash[:status] = :success

@@ -39,5 +39,5 @@ skip_before_action :require_login, only: [:login]
 
     redirect_to root_path
   end
-  
+
 end
