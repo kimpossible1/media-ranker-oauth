@@ -23,11 +23,12 @@
       <%= link_to "Add a new work", new_work_path, class: "button" %>
       <%= link_to "View all users", users_path, class: "button" %>
       <div class="float-right">
-        <% if @user != nil %>
-          <%= link_to "Logged in as #{@user.name}", user_path(@user.id), class: "button" %>
-          <% link_to "Log Out", root_path, method: :post, class: "button" %>
+
+        <% if @login_user %>
+          <%= link_to "Logged in as #{@login_user.username}", user_path(@login_user), class: "button"%>
+          <%= link_to "Log Out", logout_path, method: :post, class: "button" %>
         <% else %>
-          <% link_to "Log In", root_path, class: "button float-right" %>
+          <%= link_to "Log In", login_url, class: "button float-right" %>
         <% end %>
       </div>
     </nav>
