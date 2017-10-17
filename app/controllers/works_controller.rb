@@ -91,10 +91,14 @@ class WorksController < ApplicationController
         flash[:result_text] = "Could not upvote"
         flash[:messages] = vote.errors.messages
         status = :conflict
+        redirect_to works_path
+        return
       end
     else
       flash[:result_text] = "You must log in to do that"
       status = :unauthorized
+      redirect_to works_path
+      return
     end
 
     # Refresh the page to show either the updated vote count
