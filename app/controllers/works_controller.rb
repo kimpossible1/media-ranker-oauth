@@ -43,7 +43,12 @@ class WorksController < ApplicationController
   end
 
   def update
-
+    unless @work.user_id == @login_user.id
+      flash[:status] = [:failure]
+      flash[:result_text] = "Only the owner of the work can edit it."
+      redirect_to work_path(@work.id)
+      return
+    end
     @work.update_attributes(media_params)
     if @work.save
       flash[:status] = :success
@@ -58,6 +63,12 @@ class WorksController < ApplicationController
   end
 
   def destroy
+    unless @work.user_id == @login_user.id
+      flash[:status] = [:failure]
+      flash[:result_text] = "Only the owner of the work can edit it."
+      redirect_to work_path(@work.id)
+      return
+    end
     @work.destroy
     flash[:status] = :success
     flash[:result_text] = "Successfully destroyed #{@media_category.singularize} #{@work.id}"
