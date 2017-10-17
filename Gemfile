@@ -50,6 +50,7 @@ group :development, :test do
 
   # Use pry for rails console
   gem 'pry-rails'
+  gem 'binding-of-caller'
 end
 
 group :test do
